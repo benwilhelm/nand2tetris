@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+import sys
+import parser
+import code
+
+lines = open(sys.argv[1], 'r')
+commands = (parser.extractCommand(line) for line in lines)
+commands = (command for command in commands if command != None)
+
+for command in commands:
+    print parser.parseCommand(command)
