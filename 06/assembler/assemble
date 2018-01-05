@@ -3,10 +3,24 @@
 import sys
 import parser
 import code
+import symboltable
 
 lines = open(sys.argv[1], 'r')
-commands = (parser.extractCommand(line) for line in lines)
-commands = (command for command in commands if command != None)
+
+# remove comments and whitespace
+commands = [parser.extractCommand(line) for line in lines]
+
+# filter out lines that are not commands
+commands = [command for command in commands if command != None]
+
+# build symbol table
+symbols = symboltable.buildTable(commands)
+
+# remove lines that are just labels
+commands = [command for command in commands if parser.commandType(command) != 'L_COMMAND']
+
+# convert symbol commands to their line numbers or RAM addresses
+commands = [symboltable.convertSymbol(command) for command in commands]
 
 for command in commands:
     print parser.parseCommand(command)

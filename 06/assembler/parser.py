@@ -47,7 +47,6 @@ def commandType(cmd):
     raise ValueError(cmd)
 
 
-
 def symbol(cmd):
     if (commandType(cmd) == 'A_COMMAND'):
         return cmd[1:]

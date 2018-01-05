@@ -28,7 +28,6 @@ class TestParserFuncs(unittest.TestCase):
         with self.assertRaises(ValueError):
             parser.commandType('A+1;JGU')
 
-
     def test_symbol(self):
         self.assertEqual(parser.symbol("@foo"), 'foo')
         self.assertEqual(parser.symbol("@23"), '23')
